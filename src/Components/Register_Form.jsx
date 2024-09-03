@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom"
 const Register_Form = () => {
   const navigate = useNavigate();
 
-  const [gender, setGender] = useState();
+
   const [input, setInput] = useState({
     fname: "",
     lname: "",
@@ -14,26 +14,28 @@ const Register_Form = () => {
     address: "",
     password: "",
     conf_password: "",
+    gender: "",
   })
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const fname = e.target.name.value;
-    const lname = e.target.lname.value;
-    const emailId = e.target.email.value;
-    const mob = e.target.mob.value;
-    const address = e.target.address.value;
-    const pass = e.target.password.value;
-    const confpass = e.target.conf_password.value;
+    //const fname = e.target.name.value;
+    // const lname = e.target.lname.value;
+    // const emailId = e.target.email.value;
+    // const mob = e.target.mob.value;
+    // const address = e.target.address.value;
+    // const pass = e.target.password.value;
+    // const confpass = e.target.conf_password.value;
 
-    console.log(`First Name is : ${fname}`);
-    console.log(`Last Name is : ${lname}`);
-    console.log(`Email id is : ${emailId}`);
-    console.log(`Mobile Number is : ${mob}`);
-    console.log(`Gender is : ${gender}`);
-    console.log(`Address is : ${address}`);
-    console.log(`Pssword is : ${pass}`);
-    console.log(`Confirm Password is : ${confpass}`);
+    console.log(`First Name is : ${input.fname}`);
+    console.log(`Last Name is : ${input.lname}`);
+    console.log(`Email id is : ${input.emailId}`);
+    console.log(`Mobile Number is : ${input.mob}`);
+    console.log(`Gender is : ${input.gender}`);
+    console.log(`Address is : ${input.address}`);
+    console.log(`Pssword is : ${input.password}`);
+    console.log(`Confirm Password is : ${input.conf_password
+      }`);
 
     navigate("/Login")
 
@@ -49,20 +51,20 @@ const Register_Form = () => {
         <div className="w-full h-1/2 absolute bottom-0 bg-white/10 backdrop-blur-lg " />
       </div>
 
-      <div className="w-full p-30 flex justify-center items-center
+      <div className="w-full md:flex justify-center items-center
     lg:w-3/5">
 
-        <div className=" bg-white  px-12 py-12 rounded-3xl border-2 border-gray-200">
+        <div className=" bg-white  px-12 py-8 rounded-3xl border-2 border-gray-200">
           <div className="text-center">
             <h1 className="  text-3xl mb-1 font-semibold">Welcome..! Please enter your details.</h1>
 
           </div>
           <form action="" onSubmit={handleSubmit}>
 
-            <div className=" grid grid-cols-2 gap-10">
+            <div className=" md:grid grid-cols-2 gap-10">
               <div className=" mt-4 ">
                 <label htmlFor="" className="text-lg font-medium ">First Name : </label>
-                <input type="text" name="name" value={input.name} onChange={
+                <input type="text" name="fname" value={input.fname} onChange={
                   (e) => {
                     setInput({
                       ...input, [e.target.name]: e.target.value,
@@ -95,7 +97,7 @@ const Register_Form = () => {
                 placeholder="Enter Your Email.." />
             </div>
 
-            <div className=" grid grid-cols-2 gap-10">
+            <div className=" md:grid grid-cols-2 gap-10">
               <div className=" mt-4 ">
                 <label htmlFor="" className="text-lg font-medium ">Mobile No : </label>
                 <input type="text" name="mob" value={input.mob}
@@ -108,36 +110,52 @@ const Register_Form = () => {
               </div>
 
               <div className=" mt-4 ">
-                <label htmlFor="" className="text-lg font-medium ">Gender : </label>
+                <label htmlFor="" className="text-lg font-medium ">
+                  Gender :
+                </label>
                 <div className="flex gap-3 mt-3 justify-center">
                   <input
                     className="h-5 w-5 items-center justify-center mt-1
                     hover:via-violet-500 "
                     type="radio"
-                    name="agreed-to-terms"
+                    name="gender"
                     id="agree-yes"
                     value="male"
-                    checked={gender === 'male'}
-                    onChange={(event) => {
-                      setGender(event.target.value);
+                    checked={input.gender === "male"}
+                    onChange={(e) => {
+                      setInput({
+                        ...input,
+                        [e.target.name]: e.target.value,
+                      });
                     }}
-
                   />
-                  <label htmlFor="agree-yes" className="text-xl font-semibold mr-12 hover:text-violet-700 ">Male</label>
-
+                  <label
+                    htmlFor="agree-yes"
+                    className="text-xl font-semibold mr-12 hover:text-violet-700 "
+                  >
+                    Male
+                  </label>
 
                   <input
                     className="h-5 w-5 items-center justify-center mt-1 hover:via-violet-500 "
                     type="radio"
-                    name="agreed-to-terms"
+                    name="gender"
                     id="agree-no"
                     value="female"
-                    checked={gender === 'female'}
-                    onChange={(event) => {
-                      setGender(event.target.value);
+                    checked={input.gender === "female"}
+                    onChange={(e) => {
+                      setInput({
+                        ...input,
+                        [e.target.name]: e.target.value,
+                      });
                     }}
                   />
-                  <label htmlFor="agree-no" className="text-xl font-semibold hover:text-violet-700  ">Female</label>
+                  <label
+                    htmlFor="agree-no"
+                    className="text-xl font-semibold hover:text-violet-700  "
+                  >
+                    Female
+                  </label>
                 </div>
               </div>
 
@@ -155,7 +173,7 @@ const Register_Form = () => {
             </div>
 
 
-            <div className=" grid grid-cols-2 gap-10">
+            <div className=" md:grid grid-cols-2 gap-10">
               <div className=" mt-4 ">
                 <label htmlFor="" className="text-lg font-medium ">Create Password : </label>
                 <input type="text" name="password" value={input.password} onChange={(e) => {
